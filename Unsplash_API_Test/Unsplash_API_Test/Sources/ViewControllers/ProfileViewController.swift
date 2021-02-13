@@ -14,6 +14,7 @@ class ProfileViewController: UIViewController {
     
     private var API_KEY: String = ""
     var userInfo: UserResponse!
+    var userLikedPhotos: [Result] = []
     
     // MARK: - IBOutlets
 
@@ -24,28 +25,31 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var totalPhotos: UILabel!
     @IBOutlet weak var totalLikes: UILabel!
 
+    @IBOutlet weak var likedPhotoCollectionView: UICollectionView!
+    
     // MARK: - Life Cycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-//        getUserInfo()
+        fetchUserLikedPhoto()
+        setupCollectionView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getUserInfo()
+        fetchUserInfo()
     }
     
     // MARK: - Custom Function
     
     func setupView() {
+        fetchAPIKey()
         self.navigationController?.navigationBar.isHidden = true
         self.profileImage.layer.cornerRadius = self.profileImage.layer.frame.width/2
     }
     
-    func getUserInfo() {
-        fetchAPIKey()
+    func fetchUserInfo() {
         UserInfoService.shared.getUserInfo(clientID: API_KEY, username: "taeeehyeon") { (result) -> (Void) in
             switch result {
             case .success(let data):
@@ -73,6 +77,29 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    func fetchUserLikedPhoto() {
+        UserLikedPhotoService.shared.getUserLikedPhoto(clientID: API_KEY, username: "taeeehyeon") { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                if let response = data as? [Result] {
+                    self.userLikedPhotos = response
+                }
+                self.likedPhotoCollectionView.reloadData()
+//                print(self.userLikedPhotos[0].urls.full)
+//                print(self.userLikedPhotos[1].urls.full)
+//                print(self.userLikedPhotos[2].urls.full)
+            case .requestErr(let msg):
+                print(msg)
+            case .pathErr:
+                print("path Err!!")
+            case .serverErr:
+                print("server Err")
+            case .networkFail:
+                print("network Fail")
+            }
+        }
+    }
+
     /// Info.plist에 있는 API_KEY값 가져오기
     func fetchAPIKey(){
         if let infoDic: [String:Any] = Bundle.main.infoDictionary {
@@ -80,5 +107,56 @@ class ProfileViewController: UIViewController {
                 API_KEY = UNSPLASH_API_KEY
             }
         }
+    }
+}
+
+extension ProfileViewController {
+    func setupCollectionView() {
+        likedPhotoCollectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        likedPhotoCollectionView.dataSource = self
+        likedPhotoCollectionView.delegate = self
+        
+        // 셀 등록
+        likedPhotoCollectionView.register(LikedPhotoCVC.self, forCellWithReuseIdentifier: LikedPhotoCVC.identifier)
+        
+        // 콤포지셔널 레이아웃 등록
+        likedPhotoCollectionView.collectionViewLayout = createCompositionalLayout()
+    }
+    
+    fileprivate func createCompositionalLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout {
+            (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+            // 아이템에 대한 사이즈
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+            
+            // 아이템 사이즈로 아이템 만들기
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            item.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 5, bottom: 5, trailing: 5)
+            
+            // 그룹 사이즈
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1/2))
+            
+            // 그룹 사이즈로 그룹 만들기
+            /// count는 subitem의 개수이다
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
+            
+            // 그룹으로 섹션 만들기
+            let section = NSCollectionLayoutSection(group: group)
+            section.contentInsets = .init(top: 15, leading: 10, bottom: 15, trailing: 10)
+            return section
+        }
+        return layout
+    }
+}
+
+extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.userLikedPhotos.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = likedPhotoCollectionView.dequeueReusableCell(withReuseIdentifier: LikedPhotoCVC.identifier, for: indexPath) as? LikedPhotoCVC else { return UICollectionViewCell() }
+        cell.configure(with: userLikedPhotos[indexPath.row].urls.full)
+        return cell
     }
 }

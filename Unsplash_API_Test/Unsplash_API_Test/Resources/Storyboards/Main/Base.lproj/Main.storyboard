@@ -13,7 +13,7 @@
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="iOS_api_test" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="Unsplash_API_Test" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -32,7 +32,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCVC" id="bub-be-b9Y" customClass="PhotoCVC" customModule="iOS_api_test" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCVC" id="bub-be-b9Y" customClass="PhotoCVC" customModule="Unsplash_API_Test" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gIp-oB-7bM">
@@ -134,7 +134,7 @@
         <!--Profile View Controller-->
         <scene sceneID="xeR-Bw-o4T">
             <objects>
-                <viewController id="43c-gB-fUx" customClass="ProfileViewController" customModule="iOS_api_test" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="43c-gB-fUx" customClass="ProfileViewController" customModule="Unsplash_API_Test" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3ob-Qf-6vI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -219,6 +219,26 @@
                                     <constraint firstItem="426-0m-946" firstAttribute="leading" secondItem="R7g-sj-emv" secondAttribute="leading" constant="14" id="Zne-Jf-QAK"/>
                                 </constraints>
                             </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3aF-VT-DMH">
+                                <rect key="frame" x="0.0" y="523.5" width="414" height="372.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Xd0-Ni-Tfm">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LikedPhotoCVC" id="ZaX-tX-V9g" customClass="LikedPhotoCVC" customModule="Unsplash_API_Test" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="I2N-Xc-QsU">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mSo-xO-ttj"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -226,11 +246,15 @@
                             <constraint firstItem="mSo-xO-ttj" firstAttribute="trailing" secondItem="4IO-ae-XTP" secondAttribute="trailing" constant="80" id="1eI-3G-iey"/>
                             <constraint firstItem="4IO-ae-XTP" firstAttribute="leading" secondItem="mSo-xO-ttj" secondAttribute="leading" constant="80" id="3vr-43-YbO"/>
                             <constraint firstItem="uHL-eP-Dwx" firstAttribute="top" secondItem="Oka-nd-eYh" secondAttribute="bottom" constant="10" id="Cfy-0v-sZN"/>
+                            <constraint firstAttribute="bottom" secondItem="3aF-VT-DMH" secondAttribute="bottom" id="El9-X8-F3j"/>
                             <constraint firstItem="uHL-eP-Dwx" firstAttribute="centerX" secondItem="3ob-Qf-6vI" secondAttribute="centerX" id="GKu-yP-K7m"/>
                             <constraint firstItem="4IO-ae-XTP" firstAttribute="top" secondItem="Ged-aG-47m" secondAttribute="bottom" constant="3" id="U9R-rs-9fT"/>
+                            <constraint firstItem="3aF-VT-DMH" firstAttribute="top" secondItem="4IO-ae-XTP" secondAttribute="bottom" constant="20" id="YNy-MT-sQs"/>
                             <constraint firstItem="R7g-sj-emv" firstAttribute="top" secondItem="mSo-xO-ttj" secondAttribute="top" id="Ybl-lT-j1L"/>
                             <constraint firstItem="Oka-nd-eYh" firstAttribute="centerX" secondItem="3ob-Qf-6vI" secondAttribute="centerX" id="aat-X7-2RX"/>
+                            <constraint firstItem="3aF-VT-DMH" firstAttribute="trailing" secondItem="mSo-xO-ttj" secondAttribute="trailing" id="evl-vG-EuP"/>
                             <constraint firstItem="S8z-RV-umh" firstAttribute="centerX" secondItem="3ob-Qf-6vI" secondAttribute="centerX" id="gZa-FB-KYq"/>
+                            <constraint firstItem="3aF-VT-DMH" firstAttribute="leading" secondItem="mSo-xO-ttj" secondAttribute="leading" id="hmK-vG-BHN"/>
                             <constraint firstItem="mSo-xO-ttj" firstAttribute="trailing" secondItem="R7g-sj-emv" secondAttribute="trailing" id="lwv-Yi-qBY"/>
                             <constraint firstItem="R7g-sj-emv" firstAttribute="leading" secondItem="mSo-xO-ttj" secondAttribute="leading" id="sqb-j3-vLt"/>
                             <constraint firstItem="Oka-nd-eYh" firstAttribute="top" secondItem="S8z-RV-umh" secondAttribute="bottom" constant="33" id="vy6-YR-8Mj"/>
@@ -244,6 +268,7 @@
                     <connections>
                         <outlet property="bio" destination="uHL-eP-Dwx" id="4Xn-dm-9jl"/>
                         <outlet property="followersCount" destination="ULw-e0-ZcG" id="CJj-4e-xwq"/>
+                        <outlet property="likedPhotoCollectionView" destination="3aF-VT-DMH" id="X2u-wh-DU0"/>
                         <outlet property="profileImage" destination="S8z-RV-umh" id="rsi-ji-IqV"/>
                         <outlet property="totalLikes" destination="BxY-2c-cZg" id="ka1-XY-PEu"/>
                         <outlet property="totalPhotos" destination="u5p-qI-lBe" id="mhP-s2-uiP"/>
@@ -252,7 +277,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dXf-UY-ctT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="161" y="1533"/>
+            <point key="canvasLocation" x="160.86956521739131" y="1532.8125"/>
         </scene>
         <!--My-->
         <scene sceneID="cAb-by-IxO">

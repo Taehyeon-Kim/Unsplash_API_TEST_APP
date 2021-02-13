@@ -1,25 +1,25 @@
 //
-//  UserInfoService.swift
-//  iOS-api-test
+//  UserLikedPhotoService.swift
+//  Unsplash_API_Test
 //
-//  Created by taehy.k on 2021/02/13.
+//  Created by taehy.k on 2021/02/14.
 //
 
 import Foundation
 
 import Alamofire
 
-struct UserInfoService {
-    static let shared = UserInfoService()
+struct UserLikedPhotoService {
+    static let shared = UserLikedPhotoService()
     
     func makeURL(clientID: String, username: String) -> String {
-        var url = APIConstants.userProfileURL
+        var url = APIConstants.userLikedPhotoURL
         url = url.replacingOccurrences(of: "{client_id}", with: clientID)
         url = url.replacingOccurrences(of: ":username", with: username)
         return url
     }
     
-    func getUserInfo(clientID: String, username: String, completion: @escaping (NetworkResult<Any>) -> (Void)) {
+    func getUserLikedPhoto(clientID: String, username: String, completion: @escaping (NetworkResult<Any>) -> (Void)) {
         let url = makeURL(clientID: clientID, username: username)
         if let encodeURL = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
             let dataRequest = AF.request(encodeURL, method: .get, encoding: JSONEncoding.default)
@@ -32,8 +32,8 @@ struct UserInfoService {
                         guard let data = response.value else{
                             return
                         }
-//                        print("☎️ \(data)")
-                        completion(judgeUserInfo(status: statusCode, data: data, url: url))
+                        print("☎️ \(data)")
+                        completion(judgeUserLikedPhoto(status: statusCode, data: data, url: url))
                     case .failure(let err):
                         print(err)
                         completion(.networkFail)
@@ -43,9 +43,10 @@ struct UserInfoService {
 
     }
     
-    private func judgeUserInfo(status: Int, data: Data, url: String) -> NetworkResult<Any> {
+    private func judgeUserLikedPhoto(status: Int, data: Data, url: String) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
-        guard let decodedData = try? decoder.decode(UserResponse.self, from: data) else{
+        guard let decodedData = try? decoder.decode([Result].self, from: data) else{
+            print("no data")
             return .pathErr
         }
         switch status{

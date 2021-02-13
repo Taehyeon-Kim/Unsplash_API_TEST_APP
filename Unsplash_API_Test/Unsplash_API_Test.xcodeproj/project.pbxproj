@@ -22,6 +22,8 @@
 		BDF90D1F25D801CC0076793B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF90D1E25D801CC0076793B /* ProfileViewController.swift */; };
 		BDF90D2625D803650076793B /* UserProfileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF90D2525D803650076793B /* UserProfileData.swift */; };
 		BDF90D2925D8047D0076793B /* UserInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF90D2825D8047D0076793B /* UserInfoService.swift */; };
+		BDF90D3C25D823950076793B /* UserLikedPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF90D3B25D823950076793B /* UserLikedPhotoService.swift */; };
+		BDF90D3F25D827610076793B /* LikedPhotoCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF90D3E25D827610076793B /* LikedPhotoCVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		BDF90D1E25D801CC0076793B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		BDF90D2525D803650076793B /* UserProfileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileData.swift; sourceTree = "<group>"; };
 		BDF90D2825D8047D0076793B /* UserInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoService.swift; sourceTree = "<group>"; };
+		BDF90D3B25D823950076793B /* UserLikedPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLikedPhotoService.swift; sourceTree = "<group>"; };
+		BDF90D3E25D827610076793B /* LikedPhotoCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedPhotoCVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				BD6B140925D17A41001CE429 /* PhotoCVC.swift */,
+				BDF90D3E25D827610076793B /* LikedPhotoCVC.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -196,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				BDF90D2825D8047D0076793B /* UserInfoService.swift */,
+				BDF90D3B25D823950076793B /* UserLikedPhotoService.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -331,10 +337,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD51F61925D12B5000493CB5 /* APIConstants.swift in Sources */,
+				BDF90D3C25D823950076793B /* UserLikedPhotoService.swift in Sources */,
 				BDF90D2625D803650076793B /* UserProfileData.swift in Sources */,
 				BD6B140A25D17A41001CE429 /* PhotoCVC.swift in Sources */,
 				BD51F61C25D131D900493CB5 /* NetworkResult.swift in Sources */,
 				BDF90D2925D8047D0076793B /* UserInfoService.swift in Sources */,
+				BDF90D3F25D827610076793B /* LikedPhotoCVC.swift in Sources */,
 				BD51F61625D127D200493CB5 /* MainViewController.swift in Sources */,
 				BDF90D1F25D801CC0076793B /* ProfileViewController.swift in Sources */,
 				BD51F5F825D112C500493CB5 /* AppDelegate.swift in Sources */,
