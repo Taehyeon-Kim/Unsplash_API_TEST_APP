@@ -21,26 +21,23 @@ struct UserLikedPhotoService {
     
     func getUserLikedPhoto(clientID: String, username: String, completion: @escaping (NetworkResult<Any>) -> (Void)) {
         let url = makeURL(clientID: clientID, username: username)
-        if let encodeURL = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-            let dataRequest = AF.request(encodeURL, method: .get, encoding: JSONEncoding.default)
-            dataRequest.responseData{ (response) in
-                switch response.result{
-                    case .success:
-                        guard let statusCode = response.response?.statusCode else{
-                            return
-                        }
-                        guard let data = response.value else{
-                            return
-                        }
-                        print("☎️ \(data)")
-                        completion(judgeUserLikedPhoto(status: statusCode, data: data, url: url))
-                    case .failure(let err):
-                        print(err)
-                        completion(.networkFail)
-                }
+        print(url)
+        let dataRequest = AF.request(url, method: .get, encoding: JSONEncoding.default)
+        dataRequest.responseData{ (response) in
+            switch response.result{
+                case .success:
+                    guard let statusCode = response.response?.statusCode else{
+                        return
+                    }
+                    guard let data = response.value else{
+                        return
+                    }
+                    completion(judgeUserLikedPhoto(status: statusCode, data: data, url: url))
+                case .failure(let err):
+                    print(err)
+                    completion(.networkFail)
             }
         }
-
     }
     
     private func judgeUserLikedPhoto(status: Int, data: Data, url: String) -> NetworkResult<Any> {

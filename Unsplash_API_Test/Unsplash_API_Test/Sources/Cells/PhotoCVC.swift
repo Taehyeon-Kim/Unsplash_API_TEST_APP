@@ -19,9 +19,22 @@ class PhotoCVC: UICollectionViewCell {
         return imageView
     }()
     
+//    let likeButton: UIButton = {
+//        let likeButton = UIButton()
+//        likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+//        likeButton.tintColor = .white
+//        likeButton.backgroundColor = .darkGray
+//        likeButton.frame = CGRect(x: 150, y: 5, width: 30, height: 30)
+//        likeButton.clipsToBounds = true
+//        return likeButton
+//    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(imageView)
+        
+        // 이미지뷰에 하위뷰로 넣는 것이 아닌 콜렉션뷰셀의 하위뷰로 넣어야 함!
+//        self.addSubview(likeButton)
     }
     
     required init?(coder: NSCoder) {
@@ -32,12 +45,14 @@ class PhotoCVC: UICollectionViewCell {
         super.layoutSubviews()
         imageView.frame = contentView.bounds
         imageView.layer.cornerRadius = 10
+//        likeButton.layer.cornerRadius = 10
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         imageView.image = nil
     }
+
     
     func configure(with urlString: String) {
         guard let url = URL(string: urlString) else {

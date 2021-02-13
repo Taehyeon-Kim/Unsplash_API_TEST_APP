@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailViewController" customModule="Unsplash_API_Test" customModuleProvider="target">
+            <connections>
+                <outlet property="fullImage" destination="OJM-op-k98" id="w8B-St-zxK"/>
+                <outlet property="view" destination="iN0-l3-epB" id="REh-Yx-BOA"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OJM-op-k98">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPC-Bg-2De">
+                    <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Bd-0v-BWf">
+                            <rect key="frame" x="14" y="11" width="11" height="22"/>
+                            <state key="normal" image="back_button"/>
+                            <connections>
+                                <action selector="backButtonClicked:" destination="-1" eventType="touchUpInside" id="ral-dl-G12"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="2Bd-0v-BWf" firstAttribute="centerY" secondItem="ZPC-Bg-2De" secondAttribute="centerY" id="HQm-h0-94k"/>
+                        <constraint firstAttribute="height" constant="44" id="SJC-Lu-gv4"/>
+                        <constraint firstItem="2Bd-0v-BWf" firstAttribute="leading" secondItem="ZPC-Bg-2De" secondAttribute="leading" constant="14" id="W4m-nk-FLJ"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="OJM-op-k98" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="93N-8d-wkN"/>
+                <constraint firstItem="ZPC-Bg-2De" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="G5G-1R-Fuh"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ZPC-Bg-2De" secondAttribute="trailing" id="LvB-At-s1O"/>
+                <constraint firstItem="OJM-op-k98" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="aOs-e7-ekQ"/>
+                <constraint firstItem="ZPC-Bg-2De" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="bZC-Gg-hPv"/>
+                <constraint firstItem="OJM-op-k98" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="coa-33-rL7"/>
+                <constraint firstAttribute="bottom" secondItem="OJM-op-k98" secondAttribute="bottom" id="oVn-2l-r6A"/>
+            </constraints>
+            <point key="canvasLocation" x="140.57971014492756" y="130.58035714285714"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="back_button" width="11" height="20"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

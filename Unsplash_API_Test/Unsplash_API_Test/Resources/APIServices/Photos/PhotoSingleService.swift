@@ -1,27 +1,27 @@
 //
-//  PhotoSearchService.swift
-//  iOS-api-test
+//  PhotoSingleService.swift
+//  Unsplash_API_Test
 //
-//  Created by taehy.k on 2021/02/08.
+//  Created by taehy.k on 2021/02/14.
 //
 
 import Foundation
 
 import Alamofire
 
-struct PhotoSearchService {
-    static let shared = PhotoSearchService()
+struct PhotoSingleService {
+    static let shared = PhotoSingleService()
     
-    func makeURL(clientID: String, query: String, page: Int) -> String {
-        var url = APIConstants.searchPhotosURL
+    func makeURL(clientID: String, id: String) -> String {
+        var url = APIConstants.getPhotoURL
         url = url.replacingOccurrences(of: "{client_id}", with: clientID)
-        url = url.replacingOccurrences(of: "{query}", with: query)
-        url = url.replacingOccurrences(of: "{page}", with: String(page))
+        url = url.replacingOccurrences(of: ":id", with: id)
+
         return url
     }
     
-    func getSearchPhoto(clientID: String, query: String, page: Int, completion: @escaping (NetworkResult<Any>) -> (Void)) {
-        let url = makeURL(clientID: clientID, query: query, page: page)
+    func getSinglePhoto(clientID: String, id: String, completion: @escaping (NetworkResult<Any>) -> (Void)) {
+        let url = makeURL(clientID: clientID, id: id)
         let dataRequest = AF.request(url, method: .get, encoding: JSONEncoding.default)
 
         dataRequest.responseData{ (response) in
@@ -33,7 +33,7 @@ struct PhotoSearchService {
                     guard let data = response.value else{
                         return
                     }
-                    completion(judgeSearchPhoto(status: statusCode, data: data, url: url))
+                    completion(judgeSinglePhoto(status: statusCode, data: data, url: url))
                 case .failure(let err):
                     print(err)
                     completion(.networkFail)
@@ -41,9 +41,9 @@ struct PhotoSearchService {
         }
     }
     
-    private func judgeSearchPhoto(status: Int, data: Data, url: String) -> NetworkResult<Any> {
+    private func judgeSinglePhoto(status: Int, data: Data, url: String) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
-        guard let decodedData = try? decoder.decode(PhotoSearchResponse.self, from: data) else{
+        guard let decodedData = try? decoder.decode(PhotoSingleResponse.self, from: data) else{
             return .pathErr
         }
         switch status{

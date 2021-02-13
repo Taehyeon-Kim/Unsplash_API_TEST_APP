@@ -32,13 +32,14 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        fetchUserLikedPhoto()
         setupCollectionView()
+//        fetchUserLikedPhoto()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchUserInfo()
+        fetchUserLikedPhoto()
     }
     
     // MARK: - Custom Function
@@ -53,6 +54,7 @@ class ProfileViewController: UIViewController {
         UserInfoService.shared.getUserInfo(clientID: API_KEY, username: "taeeehyeon") { (result) -> (Void) in
             switch result {
             case .success(let data):
+                self.userInfo = nil
                 if let response = data as? UserResponse {
                     self.userInfo = response
                 }
@@ -63,7 +65,7 @@ class ProfileViewController: UIViewController {
                     self.bio.text = self.userInfo.bio
                     self.followersCount.text = String(self.userInfo.followers_count)
                     self.totalPhotos.text = String(self.userInfo.total_photos)
-                    self.totalLikes.text = String(self.userInfo.total_likes)
+//                    self.totalLikes.text = String(self.userInfo.total_likes)
                 }
             case .requestErr(let msg):
                 print(msg)
@@ -81,13 +83,12 @@ class ProfileViewController: UIViewController {
         UserLikedPhotoService.shared.getUserLikedPhoto(clientID: API_KEY, username: "taeeehyeon") { (result) -> (Void) in
             switch result {
             case .success(let data):
+//                print("☎️\(data)")
+                self.userLikedPhotos = []
                 if let response = data as? [Result] {
                     self.userLikedPhotos = response
                 }
                 self.likedPhotoCollectionView.reloadData()
-//                print(self.userLikedPhotos[0].urls.full)
-//                print(self.userLikedPhotos[1].urls.full)
-//                print(self.userLikedPhotos[2].urls.full)
             case .requestErr(let msg):
                 print(msg)
             case .pathErr:
@@ -115,6 +116,7 @@ extension ProfileViewController {
         likedPhotoCollectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         likedPhotoCollectionView.dataSource = self
         likedPhotoCollectionView.delegate = self
+//        likedPhotoCollectionView.isScrollEnabled = false
         
         // 셀 등록
         likedPhotoCollectionView.register(LikedPhotoCVC.self, forCellWithReuseIdentifier: LikedPhotoCVC.identifier)
@@ -151,6 +153,8 @@ extension ProfileViewController {
 
 extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(self.userLikedPhotos.count)
+        self.totalLikes.text = String(self.userLikedPhotos.count)
         return self.userLikedPhotos.count
     }
 

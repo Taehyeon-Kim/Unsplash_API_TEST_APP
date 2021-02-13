@@ -19,4 +19,7 @@ struct APIConstants {
     
     // api-3: 사용자 좋아요 사진 리스트
     static let userLikedPhotoURL = baseURL + "/users/:username/likes?client_id={client_id}"
+
+    // api-4: 단일 사진 가져오기 (photo-id로 검색)
+    static let getPhotoURL = baseURL + "/photos/:id?client_id={client_id}"
 }

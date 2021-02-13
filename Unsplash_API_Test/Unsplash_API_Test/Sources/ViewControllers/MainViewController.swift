@@ -17,6 +17,7 @@ class MainViewController: UIViewController {
     
     private var API_KEY: String = ""
     var photoData: [Result] = []
+    var singlePhotoData: PhotoSingleResponse!
     
     // MARK: - Life Cycle
     
@@ -44,6 +45,25 @@ class MainViewController: UIViewController {
                         self.photoData = response.results
                         self.collectionView.reloadData()
                     }
+                }
+            case .requestErr(let msg):
+                print(msg)
+            case .pathErr:
+                print("path Err")
+            case .serverErr:
+                print("server Err")
+            case .networkFail:
+                print("network Fail")
+            }
+        }
+    }
+    
+    func fetchSinglePhoto(photoID: String) {
+        PhotoSingleService.shared.getSinglePhoto(clientID: API_KEY, id: photoID) { (result) -> (Void) in
+            switch result {
+            case .success(let data):
+                if let response = data as? PhotoSingleResponse {
+                    self.singlePhotoData = response
                 }
             case .requestErr(let msg):
                 print(msg)
@@ -121,7 +141,15 @@ extension MainViewController: UISearchBarDelegate {
 }
 
 extension MainViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        fetchSinglePhoto(photoID: photoData[indexPath.row].id)
+        let detailVC = DetailViewController(nibName: "DetailViewController", bundle: nil)
+        if let url = URL(string: self.photoData[indexPath.row].urls.full) {
+            detailVC.setData(url: url)
+        } 
+        detailVC.modalPresentationStyle = .fullScreen
+        self.present(detailVC, animated: true, completion: nil)
+    }
 }
 
 extension MainViewController: UICollectionViewDataSource {
@@ -131,7 +159,15 @@ extension MainViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCVC.identifier, for: indexPath) as? PhotoCVC else { return UICollectionViewCell() }
+//        cell.likeButton.tag = indexPath.row
+//        cell.likeButton.addTarget(self, action: #selector(likeButtonClicked(_:)), for: .touchUpInside)
+        cell.tag = indexPath.row
         cell.configure(with: photoData[indexPath.row].urls.full)
         return cell
+    }
+    
+    @objc func likeButtonClicked(_ sender: UIButton) {
+        let imgID = photoData[sender.tag].id
+        print("아이디: \(imgID) - 클릭")
     }
 }

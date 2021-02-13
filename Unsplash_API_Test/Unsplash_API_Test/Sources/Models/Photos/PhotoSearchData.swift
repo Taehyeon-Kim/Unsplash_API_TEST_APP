@@ -13,10 +13,10 @@ struct PhotoSearchResponse: Codable {
 }
 
 struct Result: Codable {
-    let id: String
-    let urls: URLS
+    var id: String
+    var urls: URLS
 }
 
 struct URLS: Codable {
-    let full: String
+    var full: String
 }
