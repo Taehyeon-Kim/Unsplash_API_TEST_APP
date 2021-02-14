@@ -64,5 +64,7 @@
 	</array>
 	<key>UNSPLASH_API_KEY</key>
 	<string>Igz9GjjuKoYHkdo2Z83_pIWR-kh3VctkiYjUuklNCyk</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>사진을 갤러리에 저장할 수 있는 권한이 필요합니다.</string>
 </dict>
 </plist>

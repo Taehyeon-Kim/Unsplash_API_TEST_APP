@@ -32,4 +32,8 @@ class DetailViewController: UIViewController {
     @IBAction func backButtonClicked(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func downloadButtonClicked(_ sender: Any) {
+        downloadImage(url: self.fullImageURL!)
+    }
 }

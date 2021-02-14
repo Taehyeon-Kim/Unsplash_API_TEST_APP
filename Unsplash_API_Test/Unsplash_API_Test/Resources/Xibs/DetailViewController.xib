@@ -33,10 +33,24 @@
                                 <action selector="backButtonClicked:" destination="-1" eventType="touchUpInside" id="ral-dl-G12"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Crc-xg-VV5">
+                            <rect key="frame" x="364" y="4" width="36" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="36" id="7dq-8d-VyC"/>
+                                <constraint firstAttribute="height" constant="36" id="l6W-dU-AqT"/>
+                            </constraints>
+                            <state key="normal" image="download"/>
+                            <connections>
+                                <action selector="downloadButtonClicked:" destination="-1" eventType="touchUpInside" id="222-Bl-Lvb"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="Crc-xg-VV5" firstAttribute="centerY" secondItem="ZPC-Bg-2De" secondAttribute="centerY" id="9Sp-5V-wA4"/>
+                        <constraint firstItem="Crc-xg-VV5" firstAttribute="centerY" secondItem="ZPC-Bg-2De" secondAttribute="centerY" id="CMI-pP-H7m"/>
                         <constraint firstItem="2Bd-0v-BWf" firstAttribute="centerY" secondItem="ZPC-Bg-2De" secondAttribute="centerY" id="HQm-h0-94k"/>
+                        <constraint firstAttribute="trailing" secondItem="Crc-xg-VV5" secondAttribute="trailing" constant="14" id="LHs-Pq-TOC"/>
                         <constraint firstAttribute="height" constant="44" id="SJC-Lu-gv4"/>
                         <constraint firstItem="2Bd-0v-BWf" firstAttribute="leading" secondItem="ZPC-Bg-2De" secondAttribute="leading" constant="14" id="W4m-nk-FLJ"/>
                     </constraints>
@@ -58,6 +72,7 @@
     </objects>
     <resources>
         <image name="back_button" width="11" height="20"/>
+        <image name="download" width="72" height="72"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
